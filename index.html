@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escola Santa María del Mar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2c5aa0;
+            --secondary: #f9a826;
+            --accent: #34c9b0;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+            transition: all 0.5s ease;
+        }
+
+        /* Header Sticky */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), #1a3a6e);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            transition: all 0.3s ease;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .custom-images {
+            display: flex;
+            gap: 12px;
+            margin: 0 20px;
+        }
+
+        .custom-image {
+            width: 32px;
+            height: 22px;
+            border-radius: 4px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        .custom-image:hover {
+            transform: scale(1.15);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background-color: white;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
+            position: fixed;
+            top: 69px;
+            right: -100%;
+            width: 280px;
+            height: calc(100vh - 69px);
+            background: linear-gradient(135deg, var(--primary), #1a3a6e);
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            transition: right 0.4s ease;
+            z-index: 999;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            overflow-y: auto;
+        }
+
+        .nav-menu.active {
+            right: 0;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2rem;
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .nav-menu a i {
+            width: 25px;
+            text-align: center;
+        }
+
+        .nav-menu a:hover {
+            background-color: rgba(255,255,255,0.2);
+            transform: translateX(-5px);
+        }
+
+        .nav-menu .custom-images {
+            margin-top: 25px;
+            justify-content: center;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background-image: linear-gradient(rgba(44, 90, 160, 0.8), rgba(52, 201, 176, 0.7)), url('Captura de pantalla 2025-10-22 182358.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+            animation: fadeIn 1.5s ease;
+            position: relative;
+        }
+
+        .hero p {
+            font-size: 1.6rem;
+            max-width: 700px;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+            animation: fadeIn 2s ease;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            color: white;
+            font-size: 2rem;
+        }
+
+        /* Sections */
+        section {
+            padding: 90px 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            margin-bottom: 40px;
+            color: var(--primary);
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        p {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        /* About Section */
+        .about {
+            background-color: white;
+            position: relative;
+        }
+
+        .about::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(44, 90, 160, 0.05)"/></svg>');
+            background-size: cover;
+            pointer-events: none;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            position: relative;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.5s;
+        }
+
+        .about-image:hover {
+            transform: translateY(-10px);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* News Section */
+        .news {
+            background-color: var(--light);
+            position: relative;
+        }
+
+        .news::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,100 L100,0 L100,100 Z" fill="rgba(249, 168, 38, 0.05)"/></svg>');
+            background-size: cover;
+            pointer-events: none;
+        }
+
+        .news-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .news-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: all 0.3s;
+            color: white;
+        }
+
+        .news-header:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+
+        .news-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .news-arrow {
+            font-size: 1.4rem;
+            transition: transform 0.4s;
+        }
+
+        .news-arrow.rotated {
+            transform: rotate(180deg);
+        }
+
+        .news-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease;
+            background-color: white;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .news-content.active {
+            max-height: 800px;
+        }
+
+        .news-text {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .news-text h4 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .news-text p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        /* Activities Section */
+        .activities {
+            background-color: white;
+            position: relative;
+        }
+
+        .activities::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L0,100 L100,100 Z" fill="rgba(52, 201, 176, 0.05)"/></svg>');
+            background-size: cover;
+            pointer-events: none;
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+        }
+
+        .activity-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.4s;
+            position: relative;
+        }
+
+        .activity-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+        }
+
+        .activity-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+        }
+
+        .activity-image {
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .activity-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .activity-card:hover .activity-image img {
+            transform: scale(1.1);
+        }
+
+        .activity-content {
+            padding: 25px;
+        }
+
+        .activity-content h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        /* Location Section */
+        .location {
+            background-color: var(--light);
+            position: relative;
+        }
+
+        .location::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(249, 168, 38, 0.05)"/></svg>');
+            background-size: cover;
+            pointer-events: none;
+        }
+
+        .map-container {
+            height: 450px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.4s;
+        }
+
+        .map-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: white;
+            position: relative;
+        }
+
+        .contact::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,100 L100,0 L100,100 Z" fill="rgba(44, 90, 160, 0.05)"/></svg>');
+            background-size: cover;
+            pointer-events: none;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 35px;
+            justify-content: center;
+        }
+
+        .contact-item {
+            background-color: white;
+            padding: 30px 25px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            flex: 1;
+            min-width: 280px;
+            max-width: 320px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-item::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+        }
+
+        .contact-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+        }
+
+        .contact-item i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .call-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .call-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+        /* Social Media Section */
+        .social {
+            background-color: var(--light);
+            text-align: center;
+            position: relative;
+        }
+
+        .social::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(52, 201, 176, 0.05)"/></svg>');
+            background-size: cover;
+            pointer-events: none;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 35px;
+        }
+
+        .social-icon {
+            display: inline-block;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8rem;
+            transition: all 0.4s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .social-icon:hover {
+            transform: translateY(-8px) rotate(5deg);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #333, #555);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+        }
+
+        /* Floating Call Button */
+        .floating-call {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            z-index: 999;
+            cursor: pointer;
+            transition: all 0.4s;
+            animation: pulse 2s infinite;
+        }
+
+        .floating-call:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+        }
+
+        .floating-call i {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        /* Chat Assistant */
+        .chat-assistant {
+            position: fixed;
+            bottom: 100px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            z-index: 999;
+            cursor: pointer;
+            transition: all 0.4s;
+        }
+
+        .chat-assistant:hover {
+            transform: scale(1.1) rotate(-10deg);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+        }
+
+        .chat-assistant i {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .chat-container {
+            position: fixed;
+            bottom: 175px;
+            right: 25px;
+            width: 350px;
+            height: 450px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-container.active {
+            display: flex;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header h3 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .close-chat {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .bot-message {
+            background-color: #f1f1f1;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+
+        .user-message {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+        }
+
+        .chat-input button {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-left: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-20px) translateX(-50%); }
+            60% { transform: translateY(-10px) translateX(-50%); }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(44, 90, 160, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(44, 90, 160, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(44, 90, 160, 0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .custom-images {
+                margin: 0 10px;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero p {
+                font-size: 1.4rem;
+            }
+            
+            .chat-container {
+                width: 300px;
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-container .custom-images {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .custom-images .custom-image {
+                width: 28px;
+                height: 19px;
+            }
+            
+            h2 {
+                font-size: 2.3rem;
+            }
+            
+            .chat-container {
+                width: 280px;
+                height: 380px;
+                right: 15px;
+                bottom: 165px;
+            }
+            
+            .chat-assistant {
+                right: 15px;
+                bottom: 90px;
+            }
+            
+            .floating-call {
+                right: 15px;
+                bottom: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.3rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .activities-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-item {
+                min-width: 100%;
+            }
+            
+            .chat-container {
+                width: 90%;
+                right: 5%;
+                height: 350px;
+            }
+            
+            .chat-assistant, .floating-call {
+                width: 55px;
+                height: 55px;
+            }
+            
+            .chat-assistant i, .floating-call i {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky Header -->
+    <header class="sticky-header">
+        <div class="logo-container">
+            <img src="https://via.placeholder.com/45" alt="Logo Escola" class="logo-img">
+            <div class="logo">Escola Santa María del Mar</div>
+        </div>
+        
+        <div class="nav-container">
+            <div class="custom-images">
+                <!-- Imágenes para cambio de idioma -->
+                <img src="depositphotos_53777355-stock-photo-catalonia-flag.jpg" alt="Català" class="custom-image" id="flag-ca">
+                <img src="Bandera_de_España_(sin_escudo).svg.png" alt="Español" class="custom-image" id="flag-es">
+            </div>
+            
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <!-- Navigation Menu -->
+        <div class="nav-menu">
+            <a href="#about"><i class="fas fa-info-circle"></i>Sobre Nosaltres</a>
+            <a href="#news"><i class="fas fa-newspaper"></i>Notícies</a>
+            <a href="#activities"><i class="fas fa-paint-brush"></i>Activitats</a>
+            <a href="#location"><i class="fas fa-map-marker-alt"></i>On Som</a>
+            <a href="#contact"><i class="fas fa-phone"></i>Contacte</a>
+            <a href="#social"><i class="fas fa-share-alt"></i>Xarxes Socials</a>
+            
+            <div class="custom-images">
+                <!-- Imágenes para cambio de idioma en móvil -->
+                <img src="depositphotos_53777355-stock-photo-catalonia-flag.jpg" alt="Català" class="custom-image" id="flag-ca-mobile">
+                <img src="Bandera_de_España_(sin_escudo).svg.png" alt="Català" alt="Español" class="custom-image" id="flag-es-mobile">
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Escola Santa María del Mar</h1>
+        <p>Educant per al futur des del cor de Salou</p>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2>Sobre Nosaltres</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>L'Escola Santa María del Mar és un centre educatiu públic situat al bell mig de Salou, Tarragona. Amb una llarga tradició educativa, ens hem consolidat com un referent en educació infantil i primària a la Costa Daurada.</p>
+                    <p>El nostre projecte educatiu es basa en una metodologia activa i participativa, on l'alumne és el veritable protagonista del seu aprenentatge. Treballem per oferir una educació integral que atengui les necessitats acadèmiques, emocionals i socials de cada nen i nena.</p>
+                    <p>Disposem d'instal·lacions modernes i adaptades a les necessitats del segle XXI, amb aules espaioses, patis naturals, biblioteca, aula d'informàtica i espais específics per a les arts i l'activitat física. La nostra escola està envoltada d'un entorn natural privilegiat, propera a la platja i a les zones verdes de Salou.</p>
+                    <p>El nostre equip docent està format per professionals altament qualificats i compromesos amb la innovació educativa, treballant per oferir una educació de qualitat que prepari els nostres alumnes per als reptes del futur.</p>
+                </div>
+                <div class="about-image">
+                    <img src="Captura de pantalla 2025-10-22 182358.png" alt="Escola Santa María del Mar">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="news" id="news">
+        <div class="container">
+            <h2>Notícies</h2>
+            <div class="news-container">
+                <div class="news-header" id="news-toggle">
+                    <h3>Actualitzacions i Novetats</h3>
+                    <i class="fas fa-chevron-down news-arrow"></i>
+                </div>
+                <div class="news-content" id="news-content">
+                    <div class="news-text">
+                        <h4>Torna aviat per no perdre't res!</h4>
+                        <p>Mentre tant, ens pots seguir a les nostres xarxes socials per estar al dia de totes les nostres activitats i novetats.</p>
+                        <div class="social-icons">
+                            <a href="https://www.instagram.com/escsantmar/" class="social-icon" target="_blank">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="https://www.facebook.com/escsantmar" class="social-icon" target="_blank">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="https://x.com/escsantmar" class="social-icon" target="_blank">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section class="activities" id="activities">
+        <div class="container">
+            <h2>Les Nostres Activitats</h2>
+            <div class="activities-grid">
+                <div class="activity-card">
+                    <div class="activity-image">
+                        <img src="Captura de pantalla 2025-10-22 182244.png" alt="Concurs Fruits de Tardor">
+                    </div>
+                    <div class="activity-content">
+                        <h3>Concurs "Fruits de tardor tunejats" 2025</h3>
+                        <p>Amb motiu de la Castanyada estem celebrant, com cada any, el nostre tradicional concurs "Fruits de tardor tunejats". Com podeu veure a les fotografies són autèntiques obres d'art, el nivell ha estat altíssim! Els nostres alumnes i les seves famílies han demostrat una creativitat i habilitat extraordinàries en la creació d'aquestes peces úniques.</p>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-image">
+                        <img src="Captura de pantalla 2025-10-22 182307.png" alt="Graduació promoció 2016-2025">
+                    </div>
+                    <div class="activity-content">
+                        <h3>Graduació de la promoció 2016-2025</h3>
+                        <p>El passat 19 de juny vam celebrar l'acte de graduació de la promoció 2016-2025 de la nostra escola. Va ser un acte molt emotiu, en el qual els alumnes de 6è, acompanyats de mestres i famílies, van posar punt i final a la seva etapa a l'escola. Una etapa plena de bons moments, alegries i emocions que sempre recordaran.</p>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-image">
+                        <img src="Captura de pantalla 2025-10-22 182316.png" alt="Graduació Educació Infantil">
+                    </div>
+                    <div class="activity-content">
+                        <h3>Graduació de la promoció 2022-2025 (Educació Infantil)</h3>
+                        <p>Dijous al matí vam celebrar, al TAS, la graduació de la promoció d'Educació Infantil 2022-2025 de l'Escola Santa Maria del Mar. Ha estat un acte molt emotiu per finalitzar una etapa molt especial! Estem molt contents d'haver-ho pogut celebrar acompanyats dels familiars dels nostres alumnes d'I5.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="location" id="location">
+        <div class="container">
+            <h2>On Som</h2>
+            <p>Estem situats al Carrer de Juan Manuel Muñoz, Rodríguez, 5, al municipi de Salou, Tarragona. Un entorn privilegiat proper a la platja i amb bones comunicacions.</p>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3029.135668831843!2d1.1334673154040917!3d41.07785897929813!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a159f6c8b8c8c1%3A0x8b8a6d9b9e9e9e9e!2sCarrer%20de%20Juan%20Manuel%20Mu%C3%B1oz%2C%20Rodr%C3%ADguez%2C%205%2C%2043840%20Salou%2C%20Tarragona!5e0!3m2!1sca!2ses!4v1686146789012!5m2!1sca!2ses" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2>Contacte</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <h3>Telèfon</h3>
+                    <p>673 50 43 03</p>
+                    <a href="tel:673504303" class="call-button">Truca ara</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <h3>Horari</h3>
+                    <p>Dilluns a Divendres</p>
+                    <p>9:00 - 16:30 h</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media Section -->
+    <section class="social" id="social">
+        <div class="container">
+            <h2>Segueix-nos</h2>
+            <p>Mantingues-te informat de totes les nostres activitats i novetats a través de les xarxes socials.</p>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/escsantmar/" class="social-icon" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/escsantmar" class="social-icon" target="_blank">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://x.com/escsantmar" class="social-icon" target="_blank">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 Escola Santa María del Mar. Tots els drets reservats.</p>
+    </footer>
+
+    <!-- Floating Call Button -->
+    <div class="floating-call" id="floating-call">
+        <i class="fas fa-phone"></i>
+    </div>
+
+    <!-- Chat Assistant -->
+    <div class="chat-assistant" id="chat-assistant">
+        <i class="fas fa-robot"></i>
+    </div>
+
+    <div class="chat-container" id="chat-container">
+        <div class="chat-header">
+            <h3>Assistent Virtual</h3>
+            <button class="close-chat" id="close-chat"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="message bot-message">
+                Hola! Sóc l'assistent virtual de l'Escola Santa María del Mar. Com puc ajudar-te?
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chat-input" placeholder="Escriu el teu missatge...">
+            <button id="send-message"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script>
+        // Scroll animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // Language switching
+            const flagEs = document.getElementById('flag-es');
+            const flagCa = document.getElementById('flag-ca');
+            const flagEsMobile = document.getElementById('flag-es-mobile');
+            const flagCaMobile = document.getElementById('flag-ca-mobile');
+            
+            // Default language is Catalan
+            let currentLang = 'ca';
+            
+            // Language content
+            const translations = {
+                'es': {
+                    'hero-title': 'Escuela Santa María del Mar',
+                    'hero-desc': 'Educando para el futuro desde el corazón de Salou',
+                    'about-title': 'Sobre Nosotros',
+                    'about-text1': 'La Escuela Santa María del Mar es un centro educativo público situado en el corazón de Salou, Tarragona. Con una larga tradición educativa, nos hemos consolidado como un referente en educación infantil y primaria en la Costa Dorada.',
+                    'about-text2': 'Nuestro proyecto educativo se basa en una metodología activa y participativa, donde el alumno es el verdadero protagonista de su aprendizaje. Trabajamos para ofrecer una educación integral que atienda las necesidades académicas, emocionales y sociales de cada niño y niña.',
+                    'about-text3': 'Disponemos de instalaciones modernas y adaptadas a las necesidades del siglo XXI, con aulas espaciosas, patios naturales, biblioteca, aula de informática y espacios específicos para las artes y la actividad física. Nuestra escuela está rodeada de un entorno natural privilegiado, cercana a la playa y a las zonas verdes de Salou.',
+                    'about-text4': 'Nuestro equipo docente está formado por profesionales altamente cualificados y comprometidos con la innovación educativa, trabajando para ofrecer una educación de calidad que prepare a nuestros alumnos para los retos del futuro.',
+                    'news-title': 'Noticias',
+                    'news-header': 'Actualizaciones y Novedades',
+                    'news-text': '¡Vuelve pronto para no perderte nada! Mientras tanto, puedes seguirnos en nuestras redes sociales para estar al día de todas nuestras actividades y novedades.',
+                    'activities-title': 'Nuestras Actividades',
+                    'activity1-title': 'Concurso "Frutas de otoño tuneadas" 2025',
+                    'activity1-text': 'Con motivo de la Castanyada estamos celebrando, como cada año, nuestro tradicional concurso "Frutas de otoño tuneadas". Como podéis ver en las fotografías son auténticas obras de arte, el nivel ha sido altísimo! Nuestros alumnos y sus familias han demostrado una creatividad y habilidad extraordinarias en la creación de estas piezas únicas.',
+                    'activity2-title': 'Graduación de la promoción 2016-2025',
+                    'activity2-text': 'El pasado 19 de junio celebramos el acto de graduación de la promoción 2016-2025 de nuestra escuela. Fue un acto muy emotivo, en el cual los alumnos de 6º, acompañados de maestros y familias, pusieron punto final a su etapa en la escuela. Una etapa llena de buenos momentos, alegrías y emociones que siempre recordarán.',
+                    'activity3-title': 'Graduación de la promoción 2022-2025 (Educación Infantil)',
+                    'activity3-text': 'El jueves por la mañana celebramos, en el TAS, la graduación de la promoción de Educación Infantil 2022-2025 de la Escuela Santa María del Mar. ¡Ha sido un acto muy emotivo para finalizar una etapa muy especial! Estamos muy contentos de haberlo podido celebrar acompañados de los familiares de nuestros alumnos de I5.',
+                    'location-title': 'Dónde Estamos',
+                    'location-desc': 'Estamos situados en el Carrer de Juan Manuel Muñoz, Rodríguez, 5, en el municipio de Salou, Tarragona. Un entorno privilegiado cercano a la playa y con buenas comunicaciones.',
+                    'contact-title': 'Contacto',
+                    'contact-phone': 'Teléfono',
+                    'contact-schedule': 'Horario',
+                    'contact-days': 'Lunes a Viernes',
+                    'contact-hours': '9:00 - 16:30 h',
+                    'call-button': 'Llama ahora',
+                    'social-title': 'Síguenos',
+                    'social-desc': 'Mantente informado de todas nuestras actividades y novedades a través de las redes sociales.',
+                    'footer': '&copy; 2023 Escuela Santa María del Mar. Todos los derechos reservados.',
+                    'chat-title': 'Asistente Virtual',
+                    'chat-placeholder': 'Escribe tu mensaje...',
+                    'chat-welcome': '¡Hola! Soy el asistente virtual de la Escuela Santa María del Mar. ¿En qué puedo ayudarte?'
+                },
+                'ca': {
+                    'hero-title': 'Escola Santa María del Mar',
+                    'hero-desc': 'Educant per al futur des del cor de Salou',
+                    'about-title': 'Sobre Nosaltres',
+                    'about-text1': 'L\'Escola Santa María del Mar és un centre educatiu públic situat al bell mig de Salou, Tarragona. Amb una llarga tradició educativa, ens hem consolidat com un referent en educació infantil i primària a la Costa Daurada.',
+                    'about-text2': 'El nostre projecte educatiu es basa en una metodologia activa i participativa, on l\'alumne és el veritable protagonista del seu aprenentatge. Treballem per oferir una educació integral que atengui les necessitats acadèmiques, emocionals i socials de cada nen i nena.',
+                    'about-text3': 'Disposem d\'instal·lacions modernes i adaptades a les necessitats del segle XXI, amb aules espaioses, patis naturals, biblioteca, aula d\'informàtica i espais específics per a les arts i l\'activitat física. La nostra escola està envoltada d\'un entorn natural privilegiat, propera a la platja i a les zones verdes de Salou.',
+                    'about-text4': 'El nostre equip docent està format per professionals altament qualificats i compromesos amb la innovació educativa, treballant per oferir una educació de qualitat que prepari els nostres alumnes per als reptes del futur.',
+                    'news-title': 'Notícies',
+                    'news-header': 'Actualitzacions i Novetats',
+                    'news-text': 'Torna aviat per no perdre\'t res! Mentre tant, ens pots seguir a les nostres xarxes socials per estar al dia de totes les nostres activitats i novetats.',
+                    'activities-title': 'Les Nostres Activitats',
+                    'activity1-title': 'Concurs "Fruits de tardor tunejats" 2025',
+                    'activity1-text': 'Amb motiu de la Castanyada estem celebrant, com cada any, el nostre tradicional concurs "Fruits de tardor tunejats". Com podeu veure a les fotografies són autèntiques obres d\'art, el nivell ha estat altíssim! Els nostres alumnes i les seves famílies han demostrat una creativitat i habilitat extraordinàries en la creació d\'aquestes peces úniques.',
+                    'activity2-title': 'Graduació de la promoció 2016-2025',
+                    'activity2-text': 'El passat 19 de juny vam celebrar l\'acte de graduació de la promoció 2016-2025 de la nostra escola. Va ser un acte molt emotiu, en el qual els alumnes de 6è, acompanyats de mestres i famílies, van posar punt i final a la seva etapa a l\'escola. Una etapa plena de bons moments, alegries i emocions que sempre recordaran.',
+                    'activity3-title': 'Graduació de la promoció 2022-2025 (Educació Infantil)',
+                    'activity3-text': 'Dijous al matí vam celebrar, al TAS, la graduació de la promoció d\'Educació Infantil 2022-2025 de l\'Escola Santa Maria del Mar. Ha estat un acte molt emotiu per finalitzar una etapa molt especial! Estem molt contents d\'haver-ho pogut celebrar acompanyats dels familiars dels nostres alumnes d\'I5.',
+                    'location-title': 'On Som',
+                    'location-desc': 'Estem situats al Carrer de Juan Manuel Muñoz, Rodríguez, 5, al municipi de Salou, Tarragona. Un entorn privilegiat proper a la platja i amb bones comunicacions.',
+                    'contact-title': 'Contacte',
+                    'contact-phone': 'Telèfon',
+                    'contact-schedule': 'Horari',
+                    'contact-days': 'Dilluns a Divendres',
+                    'contact-hours': '9:00 - 16:30 h',
+                    'call-button': 'Truca ara',
+                    'social-title': 'Segueix-nos',
+                    'social-desc': 'Mantingues-te informat de totes les nostres activitats i novetats a través de les xarxes socials.',
+                    'footer': '&copy; 2023 Escola Santa María del Mar. Tots els drets reservats.',
+                    'chat-title': 'Assistent Virtual',
+                    'chat-placeholder': 'Escriu el teu missatge...',
+                    'chat-welcome': 'Hola! Sóc l\'assistent virtual de l\'Escola Santa María del Mar. Com puc ajudar-te?'
+                }
+            };
+            
+            // Function to change language
+            function changeLanguage(lang) {
+                currentLang = lang;
+                
+                // Update all text elements
+                document.querySelector('.hero h1').textContent = translations[lang]['hero-title'];
+                document.querySelector('.hero p').textContent = translations[lang]['hero-desc'];
+                document.querySelector('#about h2').textContent = translations[lang]['about-title'];
+                document.querySelectorAll('#about p')[0].textContent = translations[lang]['about-text1'];
+                document.querySelectorAll('#about p')[1].textContent = translations[lang]['about-text2'];
+                document.querySelectorAll('#about p')[2].textContent = translations[lang]['about-text3'];
+                document.querySelectorAll('#about p')[3].textContent = translations[lang]['about-text4'];
+                document.querySelector('#news h2').textContent = translations[lang]['news-title'];
+                document.querySelector('#news-toggle h3').textContent = translations[lang]['news-header'];
+                document.querySelector('#news-content p').textContent = translations[lang]['news-text'];
+                document.querySelector('#activities h2').textContent = translations[lang]['activities-title'];
+                document.querySelectorAll('.activity-content h3')[0].textContent = translations[lang]['activity1-title'];
+                document.querySelectorAll('.activity-content p')[0].textContent = translations[lang]['activity1-text'];
+                document.querySelectorAll('.activity-content h3')[1].textContent = translations[lang]['activity2-title'];
+                document.querySelectorAll('.activity-content p')[1].textContent = translations[lang]['activity2-text'];
+                document.querySelectorAll('.activity-content h3')[2].textContent = translations[lang]['activity3-title'];
+                document.querySelectorAll('.activity-content p')[2].textContent = translations[lang]['activity3-text'];
+                document.querySelector('#location h2').textContent = translations[lang]['location-title'];
+                document.querySelector('#location p').textContent = translations[lang]['location-desc'];
+                document.querySelector('#contact h2').textContent = translations[lang]['contact-title'];
+                document.querySelectorAll('.contact-item h3')[0].textContent = translations[lang]['contact-phone'];
+                document.querySelectorAll('.contact-item h3')[1].textContent = translations[lang]['contact-schedule'];
+                document.querySelectorAll('.contact-item p')[2].textContent = translations[lang]['contact-days'];
+                document.querySelectorAll('.contact-item p')[3].textContent = translations[lang]['contact-hours'];
+                document.querySelector('.call-button').textContent = translations[lang]['call-button'];
+                document.querySelector('#social h2').textContent = translations[lang]['social-title'];
+                document.querySelector('#social p').textContent = translations[lang]['social-desc'];
+                document.querySelector('footer p').innerHTML = translations[lang]['footer'];
+                document.querySelector('.chat-header h3').textContent = translations[lang]['chat-title'];
+                document.querySelector('#chat-input').placeholder = translations[lang]['chat-placeholder'];
+                
+                // Update chat welcome message
+                const chatMessages = document.getElementById('chat-messages');
+                if (chatMessages.children.length === 1) {
+                    chatMessages.children[0].textContent = translations[lang]['chat-welcome'];
+                }
+            }
+            
+            // Event listeners for flags
+            flagEs.addEventListener('click', () => changeLanguage('es'));
+            flagCa.addEventListener('click', () => changeLanguage('ca'));
+            flagEsMobile.addEventListener('click', () => changeLanguage('es'));
+            flagCaMobile.addEventListener('click', () => changeLanguage('ca'));
+            
+            // Hamburger menu functionality
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            hamburger.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                hamburger.classList.toggle('active');
+            });
+            
+            // Close menu when clicking on a link
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    hamburger.classList.remove('active');
+                });
+            });
+            
+            // News section toggle
+            const newsToggle = document.getElementById('news-toggle');
+            const newsContent = document.getElementById('news-content');
+            const newsArrow = document.querySelector('.news-arrow');
+            
+            newsToggle.addEventListener('click', () => {
+                newsContent.classList.toggle('active');
+                newsArrow.classList.toggle('rotated');
+            });
+            
+            // Floating call button
+            const floatingCall = document.getElementById('floating-call');
+            floatingCall.addEventListener('click', () => {
+                window.location.href = 'tel:673504303';
+            });
+            
+            // Chat assistant functionality
+            const chatAssistant = document.getElementById('chat-assistant');
+            const chatContainer = document.getElementById('chat-container');
+            const closeChat = document.getElementById('close-chat');
+            const sendMessage = document.getElementById('send-message');
+            const chatInput = document.getElementById('chat-input');
+            const chatMessages = document.getElementById('chat-messages');
+            
+            chatAssistant.addEventListener('click', () => {
+                chatContainer.classList.toggle('active');
+            });
+            
+            closeChat.addEventListener('click', () => {
+                chatContainer.classList.remove('active');
+            });
+            
+            // Function to normalize text (remove accents and convert to lowercase)
+            function normalizeText(text) {
+                return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+            }
+            
+            // Function to add message to chat
+            function addMessage(text, isUser = false) {
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('message');
+                messageDiv.classList.add(isUser ? 'user-message' : 'bot-message');
+                messageDiv.textContent = text;
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+            
+            // Function to process user message and generate response
+            function processMessage(message) {
+                const normalizedMessage = normalizeText(message);
+                
+                // Check for keywords in the message
+                if (normalizedMessage.includes('hola') || normalizedMessage.includes('hello') || normalizedMessage.includes('bon dia') || normalizedMessage.includes('buenos dias')) {
+                    return currentLang === 'ca' 
+                        ? 'Hola! Com puc ajudar-te avui?'
+                        : '¡Hola! ¿En qué puedo ayudarte hoy?';
+                }
+                
+                if (normalizedMessage.includes('horari') || normalizedMessage.includes('horario') || normalizedMessage.includes('hores') || normalizedMessage.includes('horas')) {
+                    return currentLang === 'ca'
+                        ? 'El nostre horari és de dilluns a divendres de 9:00 a 16:30 h.'
+                        : 'Nuestro horario es de lunes a viernes de 9:00 a 16:30 h.';
+                }
+                
+                if (normalizedMessage.includes('telefon') || normalizedMessage.includes('telefono') || normalizedMessage.includes('contacte') || normalizedMessage.includes('contacto')) {
+                    return currentLang === 'ca'
+                        ? 'Pots trucar-nos al 673 50 43 03 o fer clic al botó de trucada de la pàgina.'
+                        : 'Puedes llamarnos al 673 50 43 03 o hacer clic en el botón de llamada de la página.';
+                }
+                
+                if (normalizedMessage.includes('ubicacio') || normalizedMessage.includes('ubicacion') || normalizedMessage.includes('on som') || normalizedMessage.includes('donde estamos') || normalizedMessage.includes('adreça') || normalizedMessage.includes('direccion')) {
+                    return currentLang === 'ca'
+                        ? 'Estem situats al Carrer de Juan Manuel Muñoz, Rodríguez, 5, Salou, Tarragona. Pots veure la nostra ubicació exacta a la secció "On Som".'
+                        : 'Estamos situados en el Carrer de Juan Manuel Muñoz, Rodríguez, 5, Salou, Tarragona. Puedes ver nuestra ubicación exacta en la sección "Dónde Estamos".';
+                }
+                
+                if (normalizedMessage.includes('activitat') || normalizedMessage.includes('actividad') || normalizedMessage.includes('excursio') || normalizedMessage.includes('excursion') || normalizedMessage.includes('sortida') || normalizedMessage.includes('salida')) {
+                    return currentLang === 'ca'
+                        ? 'Tenim moltes activitats! Recentment hem fet un concurs de fruits de tardor, hem celebrat les graduacions i hem organitzat diverses activitats. Pots llegir-ne més a la secció "Les Nostres Activitats".'
+                        : '¡Tenemos muchas actividades! Recientemente hemos hecho un concurso de frutas de otoño, hemos celebrado las graduaciones y hemos organizado diversas actividades. Puedes leer más en la sección "Nuestras Actividades".';
+                }
+                
+                if (normalizedMessage.includes('noticia') || normalizedMessage.includes('notícia') || normalizedMessage.includes('novetat') || normalizedMessage.includes('novedad')) {
+                    return currentLang === 'ca'
+                        ? 'Torna aviat per no perdre\'t les properes notícies! Mentre tant, segueix-nos a les xarxes socials per estar al dia.'
+                        : '¡Vuelve pronto para no perderte las próximas noticias! Mientras tanto, síguenos en las redes sociales para estar al día.';
+                }
+                
+                if (normalizedMessage.includes('xarxa') || normalizedMessage.includes('red social') || normalizedMessage.includes('instagram') || normalizedMessage.includes('facebook') || normalizedMessage.includes('twitter')) {
+                    return currentLang === 'ca'
+                        ? 'Ens pots trobar a Instagram com @escsantmar, a Facebook com escsantmar i a Twitter com @escsantmar. Trobaràs els enllaços a la secció "Segueix-nos".'
+                        : 'Puedes encontrarnos en Instagram como @escsantmar, en Facebook como escsantmar y en Twitter como @escsantmar. Encontrarás los enlaces en la sección "Síguenos".';
+                }
+                
+                if (normalizedMessage.includes('escola') || normalizedMessage.includes('escuela') || normalizedMessage.includes('centre') || normalizedMessage.includes('centro')) {
+                    return currentLang === 'ca'
+                        ? 'L\'Escola Santa María del Mar és un centre educatiu públic amb una llarga tradició educativa. Treballem per oferir una educació integral als nostres alumnes. Pots llegir-ne més a la secció "Sobre Nosaltres".'
+                        : 'La Escuela Santa María del Mar es un centro educativo público con una larga tradición educativa. Trabajamos para ofrecer una educación integral a nuestros alumnos. Puedes leer más en la sección "Sobre Nosotros".';
+                }
+                
+                // Default response
+                return currentLang === 'ca'
+                    ? 'Ho sento, no he entès la teva pregunta. Pots preguntar-me sobre horaris, activitats, ubicació o contacte.'
+                    : 'Lo siento, no he entendido tu pregunta. Puedes preguntarme sobre horarios, actividades, ubicación o contacto.';
+            }
+            
+            // Send message when button is clicked
+            sendMessage.addEventListener('click', () => {
+                const message = chatInput.value.trim();
+                if (message) {
+                    addMessage(message, true);
+                    chatInput.value = '';
+                    
+                    // Simulate thinking delay
+                    setTimeout(() => {
+                        const response = processMessage(message);
+                        addMessage(response);
+                    }, 1000);
+                }
+            });
+            
+            // Send message when Enter key is pressed
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendMessage.click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
